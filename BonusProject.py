@@ -19,7 +19,6 @@ def countdown(ListInp, count):
 		print(":".join(ListInp))
 		sleep(1)
 
-
 inp = input("Insert time to countdown style. (00:00:00)\n>>> ").strip()
 count = input("Insert score of countdown\n>>> ").strip()
 
