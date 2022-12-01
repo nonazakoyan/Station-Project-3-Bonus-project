@@ -23,7 +23,7 @@ def countdown(ListInp, count):
 inp = input("Insert time to countdown style. (00:00:00)\n>>> ").strip()
 count = input("Insert score of countdown\n>>> ").strip()
 
-
+inp = inp.split(':')
 if (len(inp) == 3 and 0 <= int(inp[0]) <= 23 and 0 <= int(inp[1]) <= 59 and 
 	0 <= int(inp[2]) <= 59 and count.isdigit()):
 	countdown(inp, int(count))
