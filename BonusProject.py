@@ -1,31 +1,33 @@
 from time import sleep
 
-def foo(lst):
-	lst[2] = str(int(lst[2]) - 1)
-
-def countdown(ListInp, count):
-	for i in range(count):
-		if ListInp[2] == ListInp[1] == ListInp[0] == '00' :
-			ListInp[0] = '23'
-			ListInp[1] = '59'
-			ListInp[2] = '59'
-		elif ListInp[2] == ListInp[1] == '00':
-			ListInp[1] = '59'
-			ListInp[2] = '59'
-		elif ListInp[2] == '00':
-			ListInp[2] = '59'
+def countdown(inp):
+	while True:
+		if inp[0] == inp[1] == inp[2] == 0:
+			break
+		elif inp[2] == 0 and inp[1] == 0:
+			inp[0] -= 1
+			inp[2] = inp[1] = 59
+		elif inp[2] == 0:
+			inp[1] -= 1
+			inp[2] = 59
 		else:
-			foo(ListInp)
-		print(":".join(ListInp))
-		sleep(1)
-
-
+			inp[2] = inp[2] - 1
+		ls = inp.copy()
+		for i in range(len(ls)):
+			if ls[i] // 10 == 0:
+				ls[i] = "0" + str(ls[i])
+			else:
+				ls[i] = str(ls[i])
+		st = ':'.join(i for i in ls)
+		print(st)
+		sleep(0.5)
 inp = input("Insert time to countdown style. (00:00:00)\n>>> ").strip()
-count = input("Insert score of countdown\n>>> ").strip()
-
-inp = inp.split(':')
-if (len(inp) == 3 and 0 <= int(inp[0]) <= 23 and 0 <= int(inp[1]) <= 59 and 
-	0 <= int(inp[2]) <= 59 and count.isdigit()):
-	countdown(inp, int(count))
-else:
+try:
+	inp = [int(i) for i in inp.split(":")]
+	if (len(inp) == 3 and 0 <= inp[0] <= 23 and 0 <= inp[1] <= 59 and 
+		0 <= inp[2] <= 59):
+		countdown(inp)
+	else:
+		("invalid input")
+except:
 	print("invalid input")
